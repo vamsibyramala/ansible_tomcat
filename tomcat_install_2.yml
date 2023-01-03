@@ -1,0 +1,24 @@
+---
+- name: Install Apache Tomcat using ansible
+  hosts: all
+  user: root
+  tasks:
+  - name: Create a Tomcat Directory
+    file:
+      path: /tomcat
+      owner: tomcat
+      group: tomcat
+      mode: 755
+      recurse: yes
+
+  - name: Install tomcat not running as service
+    unarchive:
+     src: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.70/bin/apache-tomcat-9.0.70.tar.gz
+     dest: /tomcat
+     remote_src: yes
+     extra_opts: [--strip-components=1]
+
+  - name: start tomcat
+    command: "nohup /tomcat/bin/startup.sh"
+
+
