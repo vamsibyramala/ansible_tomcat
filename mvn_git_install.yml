@@ -1,0 +1,13 @@
+---
+ - hosts: all
+   user: root
+   tasks:
+     - name: Install git, Maven
+       yum:
+         name: "{{ packages }}"
+         state: present
+         update_cache: yes
+       vars:
+         packages:
+           - maven
+           - git

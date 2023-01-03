@@ -1,0 +1,10 @@
+---
+ - hosts: all
+   user: root
+   tasks:
+   - name: Clone a github repository
+     git:
+       repo: https://github.com/vamsibyramla/sample.git
+       dest: /test
+       clone: yes
+       update: yes
