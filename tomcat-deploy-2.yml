@@ -1,0 +1,15 @@
+---
+ - hosts: all
+   user: root
+   tasks:
+   - name: Pulling from github repository
+     git:
+       repo: https://github.com/vamsibyramla/sample.git
+       dest: /test
+       update: yes
+   - name: Running mvn clean and install
+     shell: mvn -f /test/pom.xml clean install
+     register: mvn_result
+
+   - name: deploying to tomcat
+     shell: cp -f /test/target/*.war /tomcat/webapps/test.war
